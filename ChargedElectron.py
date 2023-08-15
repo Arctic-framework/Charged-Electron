@@ -338,15 +338,11 @@ if __name__ == "__main__":
         print("4. Measure")
         print("5. Check entanglement")
         print("6. Add wires")
-        print("7. Remove wires")
         print("8. Entangle qubits")
-        print("9. Untangle qubits")
         print("10. Add custom gate")
-        print("11. Remove custom gate")
         print("12. Apply single-qubit gate from predefined set")
         print("13. Save state")
         print("14. Load state")
-        print("15. Clear circuit")
         print("0. Quit")
 
         choice = input("Enter your choice: ")
@@ -381,30 +377,18 @@ if __name__ == "__main__":
             simulator.add_wires(num_wires)
             print(f"Added {num_wires} wires. New state:")
             simulator.visualize_state()
-        elif choice == "7":
-            num_wires = int(input("Enter the number of wires to remove: "))
-            simulator.remove_wires(num_wires)
-            print(f"Removed {num_wires} wires. New state:")
-            simulator.visualize_state()
         elif choice == "8":
             qubit_indices = input("Enter the qubit indices to entangle (space-separated): ").split()
             qubit_indices = [int(qubit) for qubit in qubit_indices]
             simulator.entangle_qubits(qubit_indices)
             print(f"Qubits {', '.join([f'Q{qubit}' for qubit in qubit_indices])} entangled.")
-        elif choice == "9":
-            qubit_indices = input("Enter the qubit indices to untangle (space-separated): ").split()
-            qubit_indices = [int(qubit) for qubit in qubit_indices]
-            simulator.untangle_qubits(qubit_indices)
+
             print(f"Qubits {', '.join([f'Q{qubit}' for qubit in qubit_indices])} untangled.")
         elif choice == "10":
             gate_name = input("Enter the custom gate name: ")
             gate_matrix = np.array([[1, 0], [0, 1]], dtype=np.complex64)  # Replace with your custom gate matrix
             simulator.add_custom_gate(gate_name, gate_matrix)
             print(f"Custom gate '{gate_name}' added.")
-        elif choice == "11":
-            gate_name = input("Enter the custom gate name to remove: ")
-            simulator.remove_custom_gate(gate_name)
-            print(f"Custom gate '{gate_name}' removed.")
         elif choice == "12":
             print("Available single-qubit gates:")
             print(", ".join(simulator.gates.keys()))
@@ -420,12 +404,10 @@ if __name__ == "__main__":
             filename = input("Enter the filename to load state: ")
             simulator.load_state(filename)
             print("State loaded from", filename)
-        elif choice == "15":
-            simulator.clear_circuit()
-            print("Circuit cleared.")
         elif choice == "0":
             print("Exiting...")
             break
         else:
             print("Invalid choice. Please enter a valid option.")
+
 
